@@ -13,7 +13,7 @@ class Skill(BaseModel):
     title = models.CharField(max_length=32, verbose_name=_('title'))
     rate = models.PositiveSmallIntegerField(verbose_name=_('rate'),
                                             validators=[MinValueValidator(1), MaxValueValidator(5)])
-    user = models.ForeignKey(User, verbose_name=_('skills'), related_name='skills', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name=_('user'), related_name='skills', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _('Skill')
@@ -50,7 +50,7 @@ class Education(BaseModel):
 
 
 class Certificate(BaseModel):
-    user = models.ForeignKey(User, verbose_name=_('certificate'), related_name='certificates', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name=_('user'), related_name='certificates', on_delete=models.CASCADE)
     issuing_authority = models.CharField(max_length=32, verbose_name=_('issuing authority'))
     issue_date = models.DateField(verbose_name=_('issue date'))
 
