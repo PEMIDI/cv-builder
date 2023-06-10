@@ -17,3 +17,10 @@ class SkillListCreateAPIView(generics.ListCreateAPIView):
         return serializer.save(user=self.request.user)
 
 
+class SkillRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Skill.objects.all()
+    serializer_class = SkillSerializer
+    permission_classes = [IsAuthenticated, ]
+
+    def perform_create(self, serializer):
+        return serializer.save(user=self.request.user)
