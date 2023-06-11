@@ -63,3 +63,15 @@ class CertificatesListCreateAPIView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
+
+
+class CertificateRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Certificate.objects.all()
+    serializer_class = CertificateSerializer
+    permission_classes = [IsAuthenticated, ]
+
+    def perform_create(self, serializer):
+        return serializer.save(user=self.request.user)
+
+    def perform_update(self, serializer):
+        return serializer.save(user=self.request.user)
