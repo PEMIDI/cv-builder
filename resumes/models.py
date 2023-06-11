@@ -63,7 +63,7 @@ class Certificate(BaseModel):
 class Experience(BaseModel):
     user = models.ForeignKey(User, verbose_name=_('user'), related_name='experiences', on_delete=models.CASCADE)
     company = models.CharField(max_length=32, verbose_name=_('company'))
-    position = models.CharField(max_length=32, verbose_name='position')
+    position = models.CharField(max_length=32, verbose_name=_('position'))
     start_date = models.DateField(verbose_name=_('start date'))
     end_date = models.DateField(verbose_name=_('end date'), null=True)
     description = models.CharField(max_length=500, verbose_name=_('description'))
