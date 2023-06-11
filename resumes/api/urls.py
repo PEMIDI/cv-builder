@@ -8,7 +8,8 @@ from .views import (
     CertificatesListCreateAPIView,
     CertificateRetrieveUpdateDestroyAPIView,
     ExperienceListCreateAPIView,
-    ExperienceRetrieveUpdateDestroyAPIView, BioCreateRetrieveUpdateDestroyAPIView,
+    ExperienceRetrieveUpdateDestroyAPIView,
+    BioCreateRetrieveUpdateDestroyAPIView,
 )
 
 urlpatterns = [
