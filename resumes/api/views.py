@@ -2,9 +2,15 @@ from django.contrib.auth import get_user_model
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
-from resumes.api.serializers import SkillSerializer, EducationSerializer, CertificateSerializer, ExperienceSerializer, \
-    BioSerializer, ResumeSerializer
 from resumes.models import Skill, Education, Certificate, Experience, Bio
+from resumes.api.serializers import (
+    SkillSerializer,
+    EducationSerializer,
+    CertificateSerializer,
+    ExperienceSerializer,
+    BioSerializer,
+    ResumeSerializer
+)
 
 User = get_user_model()
 
