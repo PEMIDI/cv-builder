@@ -1,8 +1,15 @@
 from django.urls import path
 
-from .views import SkillListCreateAPIView, SkillRetrieveUpdateDestroyAPIView, EducationListCreateAPIView, \
-    EducationRetrieveUpdateDestroyAPIView, CertificatesListCreateAPIView, CertificateRetrieveUpdateDestroyAPIView, \
-    ExperienceListCreateAPIView, ExperienceRetrieveUpdateDestroyAPIView
+from .views import (
+    SkillListCreateAPIView,
+    SkillRetrieveUpdateDestroyAPIView,
+    EducationListCreateAPIView,
+    EducationRetrieveUpdateDestroyAPIView,
+    CertificatesListCreateAPIView,
+    CertificateRetrieveUpdateDestroyAPIView,
+    ExperienceListCreateAPIView,
+    ExperienceRetrieveUpdateDestroyAPIView
+)
 
 urlpatterns = [
     path('skills', SkillListCreateAPIView.as_view(), name='skills-list-create'),
