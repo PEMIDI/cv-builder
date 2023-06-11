@@ -14,6 +14,7 @@ from .views import (
 )
 
 urlpatterns = [
+    path('', ResumeAPIView.as_view(), name='resume-retrieve')
 
     path('skills', SkillListCreateAPIView.as_view(), name='skills-list-create'),
     path('skill/<int:pk>', SkillRetrieveUpdateDestroyAPIView.as_view(), name='skill-retrieve-update-destroy'),
@@ -32,5 +33,5 @@ urlpatterns = [
 
     path('bio', BioCreateRetrieveUpdateDestroyAPIView.as_view(), name='bio-create-retrieve-update-destroy'),
 
-    path('', ResumeAPIView.as_view(), name='resume-retrieve')
+
 ]
