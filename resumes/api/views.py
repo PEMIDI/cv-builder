@@ -1,8 +1,9 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
-from resumes.api.serializers import SkillSerializer, EducationSerializer, CertificateSerializer, ExperienceSerializer
-from resumes.models import Skill, Education, Certificate, Experience
+from resumes.api.serializers import SkillSerializer, EducationSerializer, CertificateSerializer, ExperienceSerializer, \
+    BioSerializer
+from resumes.models import Skill, Education, Certificate, Experience, Bio
 
 
 class SkillListCreateAPIView(generics.ListCreateAPIView):
@@ -88,3 +89,15 @@ class ExperienceRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIVi
     def perform_update(self, serializer):
         return serializer.save(user=self.request.user)
 
+
+class BioCreateRetrieveUpdateDestroyAPIView(generics.CreateAPIView, generics.RetrieveUpdateDestroyAPIView,
+                                            generics.UpdateAPIView, generics.DestroyAPIView):
+    queryset = Bio.objects.all()
+    serializer_class = BioSerializer
+    permission_classes = [IsAuthenticated, ]
+
+    def perform_create(self, serializer):
+        return serializer.save(user=self.request.user)
+
+    def perform_update(self, serializer):
+        return serializer.save(user=self.request.user)

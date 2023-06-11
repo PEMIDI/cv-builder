@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from resumes.models import Skill, Education, Certificate, Experience
+from resumes.models import Skill, Education, Certificate, Experience, Bio
 
 
 class SkillSerializer(serializers.ModelSerializer):
@@ -29,3 +29,10 @@ class ExperienceSerializer(serializers.ModelSerializer):
         model = Experience
         fields = ['id', 'user', 'position', 'start_date', 'end_date', 'description']
         read_only_fields = ['user']
+
+
+class BioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bio
+        fields = ['id', 'user', 'content']
+        read_only_fields = 'user'

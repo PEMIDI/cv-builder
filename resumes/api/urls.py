@@ -8,7 +8,7 @@ from .views import (
     CertificatesListCreateAPIView,
     CertificateRetrieveUpdateDestroyAPIView,
     ExperienceListCreateAPIView,
-    ExperienceRetrieveUpdateDestroyAPIView
+    ExperienceRetrieveUpdateDestroyAPIView, BioCreateRetrieveUpdateDestroyAPIView
 )
 
 urlpatterns = [
@@ -25,5 +25,7 @@ urlpatterns = [
 
     path('experiences', ExperienceListCreateAPIView.as_view(), name='experiences-list-create'),
     path('experience/<int:pk>', ExperienceRetrieveUpdateDestroyAPIView.as_view(),
-         name='experience-retrieve-update-destroy')
+         name='experience-retrieve-update-destroy'),
+
+    path('bio', BioCreateRetrieveUpdateDestroyAPIView.as_view(), name='bio-create-retrieve-update-destroy')
 ]
