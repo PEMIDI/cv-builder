@@ -1,9 +1,12 @@
+from django.contrib.auth import get_user_model
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
 from resumes.api.serializers import SkillSerializer, EducationSerializer, CertificateSerializer, ExperienceSerializer, \
     BioSerializer, ResumeSerializer
 from resumes.models import Skill, Education, Certificate, Experience, Bio
+
+User = get_user_model()
 
 
 class SkillListCreateAPIView(generics.ListCreateAPIView):
@@ -111,17 +114,4 @@ class ResumeAPIView(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated, ]
 
     def get_object(self):
-        user = self.request.user
-        skills = Skill.objects.filter(user=user)
-        educations = Education.objects.filter(user=user)
-        certificates = Certificate.objects.filter(user=user)
-        experiences = Experience.objects.filter(user=user)
-        bio = Bio.objects.filter(user=user).first()
-        resume_data = {
-            'skills': skills,
-            'educations': educations,
-            'certificates': certificates,
-            'experiences': experiences,
-            'bio': bio
-        }
-        return resume_data
+        return self.request.user
