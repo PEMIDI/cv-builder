@@ -8,12 +8,13 @@ from .views import (
     CertificatesListCreateAPIView,
     CertificateRetrieveUpdateDestroyAPIView,
     ExperienceListCreateAPIView,
-    ExperienceRetrieveUpdateDestroyAPIView, BioCreateRetrieveUpdateDestroyAPIView
+    ExperienceRetrieveUpdateDestroyAPIView, BioCreateRetrieveUpdateDestroyAPIView,
 )
 
 urlpatterns = [
+
     path('skills', SkillListCreateAPIView.as_view(), name='skills-list-create'),
-    path('skills/<int:pk>', SkillRetrieveUpdateDestroyAPIView.as_view(), name='skill-retrieve-update-destroy'),
+    path('skill/<int:pk>', SkillRetrieveUpdateDestroyAPIView.as_view(), name='skill-retrieve-update-destroy'),
 
     path('educations', EducationListCreateAPIView.as_view(), name='educations-list-create'),
     path('education/<int:pk>', EducationRetrieveUpdateDestroyAPIView.as_view(),
@@ -27,5 +28,5 @@ urlpatterns = [
     path('experience/<int:pk>', ExperienceRetrieveUpdateDestroyAPIView.as_view(),
          name='experience-retrieve-update-destroy'),
 
-    path('bio', BioCreateRetrieveUpdateDestroyAPIView.as_view(), name='bio-create-retrieve-update-destroy')
+    path('bio', BioCreateRetrieveUpdateDestroyAPIView.as_view(), name='bio-create-retrieve-update-destroy'),
 ]
