@@ -87,6 +87,7 @@ class Experience(BaseModel):
 
 class Bio(BaseModel):
     user = models.OneToOneField(User, verbose_name=_('user'), on_delete=models.CASCADE)
+    content = models.CharField(max_length=500, verbose_name=_('content'))
 
     class Meta:
         verbose_name = _('Bio')
