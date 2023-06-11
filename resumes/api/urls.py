@@ -1,7 +1,8 @@
 from django.urls import path
 
 from .views import SkillListCreateAPIView, SkillRetrieveUpdateDestroyAPIView, EducationListCreateAPIView, \
-    EducationRetrieveUpdateDestroyAPIView, CertificatesListCreateAPIView, CertificateRetrieveUpdateDestroyAPIView
+    EducationRetrieveUpdateDestroyAPIView, CertificatesListCreateAPIView, CertificateRetrieveUpdateDestroyAPIView, \
+    ExperienceListCreateAPIView
 
 urlpatterns = [
     path('skills', SkillListCreateAPIView.as_view(), name='skills-list-create'),
@@ -13,5 +14,7 @@ urlpatterns = [
 
     path('certificates', CertificatesListCreateAPIView.as_view(), name='certificates-list-create'),
     path('certificate/<int:pk>', CertificateRetrieveUpdateDestroyAPIView.as_view(),
-         name='certificate-retrieve-update-destroy')
+         name='certificate-retrieve-update-destroy'),
+
+    path('experiences', ExperienceListCreateAPIView.as_view(), name='experiences-list-create'),
 ]
