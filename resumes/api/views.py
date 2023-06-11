@@ -112,11 +112,11 @@ class ResumeAPIView(generics.RetrieveAPIView):
 
     def get_object(self):
         user = self.request.user
-        skills = Skill.objects.filter(user=self.request.user)
-        educations = Education.objects.filter(user=self.request.user)
-        certificates = Certificate.objects.filter(user=self.request.user)
-        experiences = Experience.objects.filter(user=self.request.user)
-        bio = Bio.objects.filter(user=self.request.user).first()
+        skills = Skill.objects.filter(user=user)
+        educations = Education.objects.filter(user=user)
+        certificates = Certificate.objects.filter(user=user)
+        experiences = Experience.objects.filter(user=user)
+        bio = Bio.objects.filter(user=user).first()
         resume_data = {
             'skills': skills,
             'educations': educations,
