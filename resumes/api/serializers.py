@@ -35,4 +35,12 @@ class BioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bio
         fields = ['id', 'user', 'content']
-        read_only_fields = 'user'
+        read_only_fields = ['user', ]
+
+
+class ResumeSerializer(serializers.Serializer):
+    skills = SkillSerializer(many=True)
+    educations = EducationSerializer(many=True)
+    certificates = CertificateSerializer(many=True)
+    experiences = ExperienceSerializer(many=True)
+    bio = BioSerializer()

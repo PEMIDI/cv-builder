@@ -10,6 +10,7 @@ from .views import (
     ExperienceListCreateAPIView,
     ExperienceRetrieveUpdateDestroyAPIView,
     BioCreateRetrieveUpdateDestroyAPIView,
+    ResumeAPIView,
 )
 
 urlpatterns = [
@@ -30,4 +31,6 @@ urlpatterns = [
          name='experience-retrieve-update-destroy'),
 
     path('bio', BioCreateRetrieveUpdateDestroyAPIView.as_view(), name='bio-create-retrieve-update-destroy'),
+
+    path('', ResumeAPIView.as_view(), name='resume-retrieve')
 ]
