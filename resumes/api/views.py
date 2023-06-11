@@ -25,6 +25,9 @@ class SkillRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
 
+    def perform_update(self, serializer):
+        return serializer.save(user=self.request.user)
+
 
 class EducationListCreateAPIView(generics.ListCreateAPIView):
     queryset = Education.objects.all()
