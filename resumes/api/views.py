@@ -17,6 +17,10 @@ User = get_user_model()
 
 
 class SkillListCreateAPIView(generics.ListCreateAPIView):
+    """
+    💪 API view to list and create skill instances.
+    """
+
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
     permission_classes = [IsAuthenticated, ]
@@ -29,6 +33,10 @@ class SkillListCreateAPIView(generics.ListCreateAPIView):
 
 
 class SkillRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    """
+      💪 API view to retrieve, update, and delete a skill instance.
+    """
+
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
     permission_classes = [IsAuthenticated, IsOwner]
@@ -38,6 +46,9 @@ class SkillRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class EducationListCreateAPIView(generics.ListCreateAPIView):
+    """
+    🎓 API view to list and create education instances.
+    """
     queryset = Education.objects.all()
     serializer_class = EducationSerializer
     permission_classes = [IsAuthenticated, ]
@@ -50,6 +61,9 @@ class EducationListCreateAPIView(generics.ListCreateAPIView):
 
 
 class EducationRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    🎓 API view to retrieve, update, and delete an education instance.
+    """
     queryset = Education.objects.all()
     serializer_class = EducationSerializer
     permission_classes = [IsAuthenticated, IsOwner]
@@ -59,6 +73,9 @@ class EducationRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIVie
 
 
 class CertificatesListCreateAPIView(generics.ListCreateAPIView):
+    """
+    📜 API view to list and create certificate instances.
+    """
     queryset = Certificate.objects.all()
     serializer_class = CertificateSerializer
     permission_classes = [IsAuthenticated, IsOwner]
@@ -71,6 +88,9 @@ class CertificatesListCreateAPIView(generics.ListCreateAPIView):
 
 
 class CertificateRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    📜 API view to retrieve, update, and delete a certificate instance.
+    """
     queryset = Certificate.objects.all()
     serializer_class = CertificateSerializer
     permission_classes = [IsAuthenticated, IsOwner]
@@ -80,6 +100,9 @@ class CertificateRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIV
 
 
 class ExperienceListCreateAPIView(generics.ListCreateAPIView):
+    """
+     🏢 API view to list and create experience instances.
+     """
     queryset = Experience.objects.all()
     serializer_class = ExperienceSerializer
     permission_classes = [IsAuthenticated, IsOwner]
@@ -92,6 +115,9 @@ class ExperienceListCreateAPIView(generics.ListCreateAPIView):
 
 
 class ExperienceRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    🏢 API view to retrieve, update, and delete an experience instance.
+    """
     queryset = Experience.objects.all()
     serializer_class = ExperienceSerializer
     permission_classes = [IsAuthenticated, IsOwner]
@@ -102,6 +128,9 @@ class ExperienceRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIVi
 
 class BioCreateRetrieveUpdateDestroyAPIView(generics.CreateAPIView, generics.RetrieveUpdateDestroyAPIView,
                                             generics.UpdateAPIView, generics.DestroyAPIView):
+    """
+    📝 API view to create, retrieve, update, and delete a bio instance.
+    """
     queryset = Bio.objects.all()
     serializer_class = BioSerializer
     permission_classes = [IsAuthenticated, IsOwner]
@@ -117,6 +146,9 @@ class BioCreateRetrieveUpdateDestroyAPIView(generics.CreateAPIView, generics.Ret
 
 
 class ResumeAPIView(generics.RetrieveAPIView):
+    """
+    📄 API view to retrieve the resume instance of the authenticated user.
+    """
     serializer_class = ResumeSerializer
     permission_classes = [IsAuthenticated, ]
 
