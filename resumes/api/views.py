@@ -78,3 +78,13 @@ class ExperienceListCreateAPIView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
+
+
+class ExperienceRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Experience.objects.all()
+    serializer_class = ExperienceSerializer
+    permission_classes = [IsAuthenticated, ]
+
+    def perform_update(self, serializer):
+        return serializer.save(user=self.request.user)
+
