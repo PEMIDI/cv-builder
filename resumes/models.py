@@ -65,7 +65,7 @@ class Experience(BaseModel):
     company = models.CharField(max_length=32, verbose_name=_('company'))
     position = models.CharField(max_length=32, verbose_name='position')
     start_date = models.DateField(verbose_name=_('start date'))
-    end_date = models.DateField(verbose_name=_('end date'))
+    end_date = models.DateField(verbose_name=_('end date'), null=True)
     description = models.CharField(max_length=500, verbose_name=_('description'))
 
     class Meta:
