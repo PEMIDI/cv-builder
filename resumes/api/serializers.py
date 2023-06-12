@@ -30,7 +30,7 @@ class CertificateSerializer(serializers.ModelSerializer):
 class ExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experience
-        fields = ['id', 'user', 'position', 'start_date', 'end_date', 'description']
+        fields = ['id', 'user', 'company', 'position', 'start_date', 'end_date', 'description']
         read_only_fields = ['user']
 
 
