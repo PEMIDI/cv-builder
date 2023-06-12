@@ -1,6 +1,8 @@
 # CV-Builder
 
-![img.png](img.png)
+<p align="center">
+  <img src="img.png" alt="Image" />
+</p>
 
 <br>
 <br>
