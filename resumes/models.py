@@ -18,7 +18,7 @@ class Skill(BaseModel):
     class Meta:
         verbose_name = _('Skill')
         verbose_name_plural = _('Skills')
-        db_table = 'Skill'
+        db_table = 'skill'
         ordering = ('title',)
 
     def __str__(self):
@@ -35,7 +35,7 @@ class Education(BaseModel):
     class Meta:
         verbose_name = _('Education')
         verbose_name_plural = _('Educations')
-        db_table = 'Education'
+        db_table = 'education'
         ordering = ('start_date',)
 
     def __str__(self):
@@ -57,6 +57,7 @@ class Certificate(BaseModel):
     class Meta:
         verbose_name = _('certificate')
         verbose_name_plural = _('certificates')
+        db_table = 'certificate'
         ordering = ('-issue_date',)
 
 
@@ -71,7 +72,7 @@ class Experience(BaseModel):
     class Meta:
         verbose_name = _('Experience')
         verbose_name_plural = _('Experiences')
-        db_table = 'Experience'
+        db_table = 'experience'
         ordering = ('-start_date',)
 
     def __str__(self):
@@ -91,4 +92,4 @@ class Bio(BaseModel):
 
     class Meta:
         verbose_name = _('Bio')
-        db_table = 'Bio'
+        db_table = 'bio'
