@@ -13,6 +13,8 @@ from .views import (
     ResumeAPIView,
 )
 
+app_name = 'resumes'
+
 urlpatterns = [
     path('', ResumeAPIView.as_view(), name='resume-retrieve'),
 
