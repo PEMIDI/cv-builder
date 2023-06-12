@@ -136,7 +136,7 @@ class BioCreateRetrieveUpdateDestroyAPIView(generics.CreateAPIView, generics.Ret
     permission_classes = [IsAuthenticated, IsOwner]
 
     def get_object(self):
-        return Bio.objects.queryset.select_related('user').filter(user=self.request.user)
+        return self.queryset.filter(user=self.request.user).first()
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
