@@ -4,10 +4,6 @@
   <img src="img.png" alt="Image" />
 </p>
 
-<br>
-<br>
-
-
 #  Setup Guide, step by step:
 
 
