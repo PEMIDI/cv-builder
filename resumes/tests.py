@@ -4,7 +4,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from resumes.models import Skill, Education, Certificate, Experience
+from resumes.models import Skill, Education, Certificate, Experience, Bio
 
 User = get_user_model()
 
@@ -268,3 +268,34 @@ class ExperienceAPITestCase(TestCase):
         response = self.client.delete(self.experience_detail_url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(Experience.objects.filter(pk=self.experience.pk).exists())
+
+
+class ResumeAPITestCase(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.resume_url = reverse('resumes:resume-retrieve')
+        self.skills_url = reverse('resumes:skills-list-create')
+        self.educations_url = reverse('resumes:educations-list-create')
+        self.certificates_url = reverse('resumes:certificates-list-create')
+        self.experiences_url = reverse('resumes:experiences-list-create')
+
+        # Create a bio object and associate it with the user
+        self.bio = Bio.objects.create(user=self.user, content='Bio content')
+        self.bio_url = reverse('resumes:bio-create-retrieve-update-destroy')
+
+    def test_retrieve_resume(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(self.resume_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # Assert response data
+        self.assertEqual(response.data['first_name'], self.user.first_name)
+        self.assertEqual(response.data['last_name'], self.user.last_name)
+        self.assertEqual(response.data['email'], self.user.email)
+        self.assertEqual(response.data['phone_number'], self.user.phone_number)
+        self.assertEqual(len(response.data['skills']), self.user.skills.count())
+        self.assertEqual(len(response.data['educations']), self.user.educations.count())
+        self.assertEqual(len(response.data['certificates']), self.user.certificates.count())
+        self.assertEqual(len(response.data['experiences']), self.user.experiences.count())
+        self.assertEqual(response.data['bio']['content'], self.bio.content)
