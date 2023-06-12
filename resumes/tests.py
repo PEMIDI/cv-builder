@@ -4,7 +4,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from resumes.models import Skill, Education
+from resumes.models import Skill, Education, Certificate, Experience
 
 User = get_user_model()
 
@@ -145,3 +145,126 @@ class EducationAPITestCase(TestCase):
         response = self.client.delete(self.education_detail_url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(Education.objects.filter(pk=self.education.pk).exists())
+
+
+class CertificateAPITestCase(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.client.force_authenticate(user=self.user)
+        self.certificate = Certificate.objects.create(
+            user=self.user,
+            issuing_authority='Authority',
+            issue_date='2022-01-01'
+        )
+        self.certificate_detail_url = reverse('resumes:certificate-retrieve-update-destroy', args=[self.certificate.pk])
+
+    def test_list_certificates(self):
+        response = self.client.get(reverse('resumes:certificates-list-create'))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]['issuing_authority'], self.certificate.issuing_authority)
+        self.assertEqual(response.data[0]['issue_date'], str(self.certificate.issue_date))
+
+    def test_create_certificate(self):
+        data = {
+            'issuing_authority': 'New Authority',
+            'issue_date': '2023-01-01'
+        }
+        response = self.client.post(reverse('resumes:certificates-list-create'), data)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data['issuing_authority'], data['issuing_authority'])
+        self.assertEqual(response.data['issue_date'], data['issue_date'])
+
+    def test_retrieve_certificate(self):
+        response = self.client.get(self.certificate_detail_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['issuing_authority'], self.certificate.issuing_authority)
+        self.assertEqual(response.data['issue_date'], str(self.certificate.issue_date))
+
+    def test_update_certificate(self):
+        data = {
+            'issuing_authority': 'Updated Authority',
+            'issue_date': '2024-01-01'
+        }
+        response = self.client.put(self.certificate_detail_url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['issuing_authority'], data['issuing_authority'])
+        self.assertEqual(response.data['issue_date'], data['issue_date'])
+
+    def test_delete_certificate(self):
+        response = self.client.delete(self.certificate_detail_url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(Certificate.objects.filter(pk=self.certificate.pk).exists())
+
+
+class ExperienceAPITestCase(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.client.force_authenticate(user=self.user)
+        self.experience = Experience.objects.create(
+            user=self.user,
+            company='Company',
+            position='Position',
+            start_date='2022-01-01',
+            end_date='2022-12-31',
+            description='Experience description'
+        )
+        self.experience_detail_url = reverse('resumes:experience-retrieve-update-destroy', args=[self.experience.pk])
+
+    def test_list_experiences(self):
+        response = self.client.get(reverse('resumes:experiences-list-create'))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]['company'], self.experience.company)
+        self.assertEqual(response.data[0]['position'], self.experience.position)
+        self.assertEqual(response.data[0]['start_date'], str(self.experience.start_date))
+        self.assertEqual(response.data[0]['end_date'], str(self.experience.end_date))
+        self.assertEqual(response.data[0]['description'], self.experience.description)
+
+    def test_create_experience(self):
+        data = {
+            'company': 'New Company',
+            'position': 'New Position',
+            'start_date': '2023-01-01',
+            'end_date': '2023-12-31',
+            'description': 'New experience description'
+        }
+        response = self.client.post(reverse('resumes:experiences-list-create'), data)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data['company'], data['company'])
+        self.assertEqual(response.data['position'], data['position'])
+        self.assertEqual(response.data['start_date'], data['start_date'])
+        self.assertEqual(response.data['end_date'], data['end_date'])
+        self.assertEqual(response.data['description'], data['description'])
+
+    def test_retrieve_experience(self):
+        response = self.client.get(self.experience_detail_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['company'], self.experience.company)
+        self.assertEqual(response.data['position'], self.experience.position)
+        self.assertEqual(response.data['start_date'], str(self.experience.start_date))
+        self.assertEqual(response.data['end_date'], str(self.experience.end_date))
+        self.assertEqual(response.data['description'], self.experience.description)
+
+    def test_update_experience(self):
+        data = {
+            'company': 'Updated Company',
+            'position': 'Updated Position',
+            'start_date': '2024-01-01',
+            'end_date': '2024-12-31',
+            'description': 'Updated experience description'
+        }
+        response = self.client.put(self.experience_detail_url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['company'], data['company'])
+        self.assertEqual(response.data['position'], data['position'])
+        self.assertEqual(response.data['start_date'], data['start_date'])
+        self.assertEqual(response.data['end_date'], data['end_date'])
+        self.assertEqual(response.data['description'], data['description'])
+
+    def test_delete_experience(self):
+        response = self.client.delete(self.experience_detail_url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(Experience.objects.filter(pk=self.experience.pk).exists())
