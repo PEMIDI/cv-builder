@@ -26,7 +26,7 @@ class SkillListCreateAPIView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated, ]
 
     def get_queryset(self):
-        return self.queryset.objects.select_related('user').filter(user=self.request.user)
+        return self.queryset.select_related('user').filter(user=self.request.user)
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
@@ -81,7 +81,7 @@ class CertificatesListCreateAPIView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated, IsOwner]
 
     def get_queryset(self):
-        return self.queryset.objects.select_related('user').filter(user=self.request.user)
+        return self.queryset.select_related('user').filter(user=self.request.user)
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
@@ -108,7 +108,7 @@ class ExperienceListCreateAPIView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated, IsOwner]
 
     def get_queryset(self):
-        return self.queryset.objects.select_related('user').filter(user=self.request.user)
+        return self.queryset.select_related('user').filter(user=self.request.user)
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
@@ -136,7 +136,7 @@ class BioCreateRetrieveUpdateDestroyAPIView(generics.CreateAPIView, generics.Ret
     permission_classes = [IsAuthenticated, IsOwner]
 
     def get_object(self):
-        return Bio.objects.queryset.objects.select_related('user').filter(user=self.request.user)
+        return Bio.objects.queryset.select_related('user').filter(user=self.request.user)
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
