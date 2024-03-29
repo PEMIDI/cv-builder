@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
@@ -40,6 +41,7 @@ class UserSerializer(serializers.ModelSerializer):
         except ValidationError as e:
             raise serializers.ValidationError({'password': e.messages})
 
+        validated_data['password'] = make_password(validated_data.get('password'))
         user = User.objects.create_user(**validated_data)
         return user
 
