@@ -1,0 +1,46 @@
+services:
+  cv:
+    build: .
+    container_name: cv_web
+    command: bash ./bashes/RunBash.sh
+    restart: always
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+    env_file:
+      - ./.env
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    networks:
+      - cv_network
+  
+  postgres_db:
+    image: postgres:15-alpine
+    container_name: cv_db
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - cv_data:/var/lib/postgresql/data
+    networks:
+      - cv_network
+    healthcheck:
+          test: "exit 0"
+
+networks:
+  cv_network:
+    driver: bridge
+  
+
+volumes:
+  cv_data:
+
