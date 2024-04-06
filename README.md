@@ -51,3 +51,25 @@ DB_PORT=5432
 ### Migrate tables to the database
 ```python manage.py migrate```
 
+# Run with Docker
+* First, you should install [Docker](https://docs.docker.com/get-docker/) <br>
+
+* Then clone the project:
+```
+https://github.com/PEMIDI/cv-builder.git
+```
+
+### After you created your ```.env``` file:
+```
+docker compose up
+```
+
+### Migrate your database:
+* First:
+```
+docker exec -it cv_web bash
+```
+* Then:
+```
+python3 manage.py migrate
+```
