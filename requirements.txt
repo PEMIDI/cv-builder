@@ -20,7 +20,7 @@ psycopg2-binary==2.9.6
 PyJWT==1.7.1
 python-dotenv==1.0.0
 pytz==2023.3
-requests==2.31.0
+requests==2.32.4
 ruamel.yaml==0.17.31
 ruamel.yaml.clib==0.2.7
 simplejson==3.19.1
