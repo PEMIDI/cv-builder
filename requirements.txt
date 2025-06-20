@@ -27,4 +27,4 @@ simplejson==3.19.1
 sqlparse==0.4.4
 typing_extensions==4.6.3
 uritemplate==4.1.1
-urllib3==2.0.3
+urllib3==2.5.0
