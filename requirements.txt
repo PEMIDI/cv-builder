@@ -6,7 +6,7 @@ coreschema==0.0.4
 Django==3.2
 django-rest-swagger==2.2.0
 djangorestframework==3.12.4
-djangorestframework-simplejwt==5.2.2
+djangorestframework-simplejwt==5.5.1
 drf-yasg==1.20.0
 idna==3.4
 inflection==0.5.1
